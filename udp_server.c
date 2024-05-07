@@ -30,12 +30,14 @@ int main (int argc, char **argv) {
     exit (1);
   }
 
-  serv_sock = socket (PF_INET, SOCK_DGRAM, 0) ;
+  serv_sock = socket (PF_INET, SOCK_DGRAM, 0) ; // 성공하면 파일 디스크립터, 실패하면 -1 
 
   if(serv_sock == -1)
     error_handling("socket() error");
 
-  memset(&serv_addr, 0, sizeof (serv_addr)) ;
+  memset(&serv_addr, 0, sizeof (serv_addr)) ; // 메모리 블록을 특정 값으로 설정하는 함수, 쓰레기값이 남아있을 수 있으니 초기화를 해야한다
+
+  // ?
   serv_addr.sin_family = AF_INET;
   serv_addr. sin_addr.s_addr = htonl(INADDR_ANY) ;
   serv_addr.sin_port = htons(atoi(argv [1])) ;
