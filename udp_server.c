@@ -59,10 +59,9 @@ int main (int argc, char **argv) {
     message[str_len] = '\0';
 
     printf("ip : %s\n", inet_ntoa(clnt_addr.sin_addr));
-    printf("received %d data : %s\n\n",num, message);
+    printf("received data : %s\n\n", message);
  
     sendto(serv_sock, message, strlen(message), 0, (struct sockaddr*)&clnt_addr, sizeof (clnt_addr)) ;
-    num++;
   }
   close(serv_sock);
   return 0;
