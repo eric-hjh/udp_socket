@@ -62,7 +62,9 @@ int main (int argc, char **argv) {
     printf("received %d bytes data : %s\n\n",str_len, message);
  
     sendto(serv_sock, message, strlen(message), 0, (struct sockaddr*)&clnt_addr, sizeof (clnt_addr)) ;
+    num++;
   }
   close(serv_sock);
   return 0;
 }
+

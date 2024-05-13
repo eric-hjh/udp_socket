@@ -38,6 +38,10 @@ int main (int argc, char **argv) {
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
   serv_addr.sin_port = htons(atoi (argv[2]));
+  
+  while (1)
+  {
+    sendto(sock, MSG1, strlen(MSG1), 0, (struct sockaddr*)&serv_addr, sizeof (serv_addr)) ;
 
   while (1) {
         printf("서버로 전송 (종료 q) : ");
