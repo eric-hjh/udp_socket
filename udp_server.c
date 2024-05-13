@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BUFSIZE 1024
+#define BUFSIZE 5
 void error_handling(char *message) {
     perror(message);
     exit(1);
@@ -59,7 +59,7 @@ int main (int argc, char **argv) {
     message[str_len] = '\0';
 
     printf("ip : %s\n", inet_ntoa(clnt_addr.sin_addr));
-    printf("received data : %s\n\n", message);
+    printf("received %d bytes data : %s\n\n",str_len, message);
  
     sendto(serv_sock, message, strlen(message), 0, (struct sockaddr*)&clnt_addr, sizeof (clnt_addr)) ;
   }

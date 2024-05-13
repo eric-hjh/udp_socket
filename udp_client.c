@@ -47,6 +47,8 @@ int main (int argc, char **argv) {
             break;
 
         sendto(sock, msg, strlen(msg), 0, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+        if (strlen(msg) >= 5) 
+            error_handling("bufsize over");
     }
 
   close(sock);
