@@ -1,6 +1,10 @@
 {
   "files.associations": {
     "socket.h": "c",
-    "in.h": "c"
-  }
+    "in.h": "c",
+    "inet.h": "c",
+    "_pid_t.h": "c",
+    "errno.h": "c"
+  },
+  "C_Cpp.errorSquiggles": "disabled"
 }

@@ -22,6 +22,7 @@ int main (int argc, char **argv) {
   char message[BUFSIZE]; 
   int str_len;
   char msg[BUFSIZE];
+
   
   struct sockaddr_in serv_addr; 
 
@@ -30,7 +31,7 @@ int main (int argc, char **argv) {
     exit(1);
   }
 
-  sock = socket (AF_INET, SOCK_DGRAM, 0) ;
+  sock = socket(AF_INET, SOCK_DGRAM, 0) ;
   if (sock == -1)
     error_handling("UDP 소켓 생성 오류");
   
@@ -38,10 +39,7 @@ int main (int argc, char **argv) {
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_addr.s_addr = inet_addr(argv[1]);
   serv_addr.sin_port = htons(atoi (argv[2]));
-  
-  while (1)
-  {
-    sendto(sock, MSG1, strlen(MSG1), 0, (struct sockaddr*)&serv_addr, sizeof (serv_addr)) ;
+
 
   while (1) {
         printf("서버로 전송 (종료 q) : ");
@@ -50,9 +48,8 @@ int main (int argc, char **argv) {
         if (strcmp(msg, "q\n") == 0)
             break;
 
-        sendto(sock, msg, strlen(msg), 0, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-        if (strlen(msg) >= 5) 
-            error_handling("bufsize over");
+        str_len = sendto(sock, msg, strlen(msg), 0, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+        printf("send message byte : %d \n", str_len);
     }
 
   close(sock);
