@@ -19,9 +19,10 @@ void error_handling(char *message) {
 
 int main (int argc, char **argv) {
   int serv_sock;
-  char message[BUFSIZE]; 
   int str_len, num = 0;
   int serv_bind;
+  char message[BUFSIZE];
+  
 
   struct sockaddr_in serv_addr; 
   struct sockaddr_in clnt_addr; 
@@ -44,7 +45,6 @@ int main (int argc, char **argv) {
   serv_addr.sin_port = htons(atoi(argv[1])); 
 
   
-
   serv_bind = bind(serv_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
   if(serv_bind == -1)
     error_handling("bind() error");
@@ -79,7 +79,6 @@ int main (int argc, char **argv) {
             }
             continue;
     }
-    message[str_len] = '\0';
 
     printf("\nsocket : %d serv_bind : %d\n", serv_sock, serv_bind);
     printf("received %d bytes data : %s\n",str_len, message);

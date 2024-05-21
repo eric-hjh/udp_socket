@@ -10,7 +10,8 @@
 #include <string.h>
 
 #define _CRT_SECURE_NO_WARNINGS 
-#define BUFSIZE 30
+#define BUFSIZE 10
+
 
 void error_handling(char *message) {
     perror(message);
@@ -19,9 +20,8 @@ void error_handling(char *message) {
 
 int main (int argc, char **argv) {
   int sock;
-  char message[BUFSIZE]; 
   int str_len;
-  char msg[BUFSIZE];
+  char message[BUFSIZE];
 
   
   struct sockaddr_in serv_addr; 
@@ -32,6 +32,7 @@ int main (int argc, char **argv) {
   }
 
   sock = socket(AF_INET, SOCK_DGRAM, 0) ;
+  printf("sock file descriptor : %d \n", sock);
   if (sock == -1)
     error_handling("UDP 소켓 생성 오류");
   
@@ -43,13 +44,16 @@ int main (int argc, char **argv) {
 
   while (1) {
         printf("서버로 전송 (종료 q) : ");
-        fgets(msg, sizeof(msg), stdin);
+        fgets(message, sizeof(message), stdin);
 
-        if (strcmp(msg, "q\n") == 0)
+        if (strcmp(message, "q\n") == 0)
             break;
-
-        str_len = sendto(sock, msg, strlen(msg), 0, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
-        printf("send message byte : %d \n", str_len);
+        if(strlen(message) < 5){
+          str_len = sendto(sock, message, strlen(message), 0, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
+        } else{
+          printf("메시지가 서버 버퍼 크기(5)를 초과했습니다. 현재 메시지 (%lu). 다시 입력하세요.\n", strlen(message));
+        }
+        
     }
 
   close(sock);
