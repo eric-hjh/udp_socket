@@ -49,7 +49,7 @@ int main (int argc, char **argv) {
   if(serv_bind == -1)
     error_handling("bind() error");
 
-  printf("waiting for messages\n");
+  printf("waiting for messages!\n");
 
   sleep (1) ;
 
@@ -80,7 +80,7 @@ int main (int argc, char **argv) {
             continue;
     }
 
-    printf("\nsocket : %d serv_bind : %d\n", serv_sock, serv_bind);
+    message[str_len - 1] = '\0';
     printf("received %d bytes data : %s\n",str_len, message);
  
     num++;
