@@ -32,7 +32,7 @@ int main (int argc, char **argv) {
   }
 
   sock = socket(AF_INET, SOCK_DGRAM, 0) ;
-  printf("sock file descriptor : %d \n", sock);
+  
   if (sock == -1)
     error_handling("UDP 소켓 생성 오류");
   
